@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+<div class="loginbox">
+    <img th:src="@{/images/avatar.png}" class="avatar">
+    <h1>Zaloguj się tu!</h1>
+    <form action="" method="post">
+
+        <p>Nazwa użytkownika</p>
+        <input type="text" name="login" placeholder="Podaj nazwę użytkownika: ">
+        <p>Hasło</p>
+        <input type="password" name="haslo" placeholder="Podaj hasło: ">
+        <input type="submit" value="Zaloguj się!" />
+    </form>
+    <a th:href="@{/rejestracja}"><input type="submit" value="Zarejestruj się!" /></a>
+</div>
+</body>
+</html>
