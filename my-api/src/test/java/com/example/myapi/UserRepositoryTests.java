@@ -16,7 +16,7 @@ public class UserRepositoryTests {
 
     @Autowired
     private UserRepository repo;
-
+/*
     @Test
     public void testCreateUser() {
         User user = new User();
@@ -28,4 +28,13 @@ public class UserRepositoryTests {
         repo.save(user);
 
     }
+
+ */
+//    @Test
+//    public void testFindUserByLogin()
+//    {
+//        String login = "test";
+//        User user = repo.findUserByLogin(login);
+//        assertThat(user).isNotNull();
+//    }
 }

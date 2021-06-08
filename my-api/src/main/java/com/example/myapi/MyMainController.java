@@ -1,6 +1,7 @@
 package com.example.myapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,12 +33,21 @@ class MyMainController {
             {
                 return "register_password_error";
             }
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String encodedPassword = encoder.encode(user.getPassword());
+            user.setPassword(encodedPassword);
             repo.save(user);
         }
         catch(Exception e)
         {
             return "register_error";
         }
+        return "register_success";
+    }
+    @PostMapping("/shopMainPage")
+    public String loggingToShop()
+    {
+
         return "register_success";
     }
 }
