@@ -8,7 +8,7 @@
 <div class="loginbox">
     <img th:src="@{/images/avatar.png}" class="avatar">
     <h1>Zaloguj się tu!</h1>
-    <form th:action="@{/}" method="post">
+    <form th:action="@{/}" method="post" autocomplete="off">
         <p>Nazwa użytkownika</p>
         <input type="text" name="username" id="username" placeholder="Podaj nazwę użytkownika: ">
         <p>Hasło</p>
@@ -16,8 +16,8 @@
         <input type="submit" value="Zaloguj się!" />
     </form>
     <a th:href="@{/rejestracja}"><input type="submit" value="Zarejestruj się!" /></a>
-    <div th:if="${param.error}">Wystapil blad podczas logowania!</div>
-    <div th:if="${param.logout}">Wylogowano pomyslnie!</div>
+    <div class="extra_text" th:if="${param.error}">Wystapil blad podczas logowania!</div>
+    <div class="extra_text" th:if="${param.logout}">Wylogowano pomyslnie!</div>
 </div>
 </body>
 </html>

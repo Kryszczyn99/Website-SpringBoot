@@ -44,10 +44,10 @@ class MyMainController {
         }
         return "register_success";
     }
-    @PostMapping("/shopMainPage")
+    @GetMapping("/shopMainPage")
     public String loggingToShop()
     {
 
-        return "register_success";
+        return "shop_main_page_layout";
     }
 }

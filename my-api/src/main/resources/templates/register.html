@@ -9,7 +9,7 @@
 <div class="loginbox">
     <img th:src="@{/images/avatar.png}" class="avatar">
     <h1>Zarejestruj się tu!</h1>
-    <form th:action="@{/process_register}" method="post" th:object="${user}">
+    <form th:action="@{/process_register}" method="post" th:object="${user}" autocomplete="off">
         <p>Imię</p>
         <input type="text" name="forename" placeholder="Podaj swoje imię: " th:field="*{firstName}" required minlength="3" maxlength="30">
         <p>Nazwisko</p>

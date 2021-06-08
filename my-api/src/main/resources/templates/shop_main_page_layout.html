@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8" />
+    <title>Sklep internetowy</title>
+    <link rel="stylesheet" th:href="@{/css/shop_main_page_css.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+    <div class="menu-bar">
+        <ul>
+            <form th:action="@{/logout}" method="post">
+                <input class="logout_button" type="submit" value="Wyloguj się!"/>
+            </form>
+            <li><a href="elektronika.php">Elektronika </a></li>
+            <li><a href="sport.php">Sport </a></li>
+            <li><a href="jedzenie.php">Jedzenie </a></li>
+            <li><a href="ogrod.php">Ogród </a></li>
+            <li><a href="rozrywka.php">Rozrywka i gaming  </a></li>
+            <li><a href="koszyk.php">Koszyk</a></li>
+            <li><a href="profil.php">Profil</a></li>
+
+        </ul>
+
+    </div>
+
+</body>
+</html>

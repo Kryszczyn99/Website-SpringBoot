@@ -12,12 +12,11 @@ body
 {
 	width: 320px;
 	height: 800px;
-	background: #000;
+	background: rgba(0,0,0,0.5);
 	color: #fff;
 	top: 10%;
 	left: 30%;
 	position: absolute;
-	transform: trasnlate(-50%,-50%);
 	box-sizing: border-box;
 	padding: 70px 30px;
 	border-style: solid;
@@ -81,6 +80,9 @@ h1
 	background: #ffc107;
 	color: #000;
 }
-
+input::placeholder
+{
+	color: antiquewhite;
+}
 
 

@@ -11,26 +11,25 @@ body
 {
 	width: 320px;
 	height: 500px;
-	background: #000;
+	background: rgba(0,0,0,0.5);
 	color: #fff;
 	top: 20%;
 	left: 30%;
 	position: absolute;
-	transform: trasnlate(-50%,-50%);
 	box-sizing: border-box;
 	padding: 70px 30px;
 	border-style: solid;
 }
+
 .loginbox2
 {
 	width: 320px;
 	height: 300px;
-	background: #000;
+	background: rgba(0,0,0,0.5);
 	color: #fff;
 	top: 20%;
 	left: 30%;
 	position: absolute;
-	transform: trasnlate(-50%,-50%);
 	box-sizing: border-box;
 	padding: 70px 30px;
 	border-style: solid;
@@ -115,6 +114,15 @@ h1
 	curson: pointer;
 	background: #ffc107;
 	color: #000;
+}
+.extra_text
+{
+	text-align: center;
+	color:white;
+}
+input::placeholder
+{
+	color: antiquewhite;
 }
 
 
