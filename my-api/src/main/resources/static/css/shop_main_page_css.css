@@ -17,7 +17,7 @@ body
 .menu-bar
 {
     background: lightseagreen;
-    text-align: center;
+    text-align: left;
     border: 2px solid white;
 }
 .menu-bar ul
@@ -58,6 +58,21 @@ body
     font-family: sans-serif;
 }
 .logout_button:hover
+{
+    background: #2bab0d;
+}
+.window_name
+{
+    height: 80px;
+    padding: 15px;
+    border: 2px solid white;
+    background: lightseagreen;
+    text-align: center;
+    color:white;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+.window_name:hover
 {
     background: #2bab0d;
 }

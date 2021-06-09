@@ -1,6 +1,7 @@
 package com.example.myapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,9 +46,20 @@ class MyMainController {
         return "register_success";
     }
     @GetMapping("/shopMainPage")
-    public String loggingToShop()
+    public String loggingToShop(Model model)
     {
 
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = null;
+        String firstName = null;
+        if(user instanceof CustomUserDetails)
+        {
+            username = ((CustomUserDetails)user).getUsername();
+            firstName = ((CustomUserDetails)user).getFirstName();
+            System.out.println(username);
+        }
+        model.addAttribute("username",username);
+        model.addAttribute("firstName",firstName);
         return "shop_main_page_layout";
     }
 }
