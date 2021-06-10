@@ -170,10 +170,23 @@ body
 .loginbox
 {
     width: 320px;
-    height: 800px;
+    height: 685px;
     background: rgba(0,0,0,0.5);
     color: #fff;
-    top: 10%;
+    top: 100px;
+    left: 30%;
+    position: absolute;
+    box-sizing: border-box;
+    padding: 70px 30px;
+    border-style: solid;
+}
+.loginbox2
+{
+    width: 320px;
+    height: 300px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    top: 20%;
     left: 30%;
     position: absolute;
     box-sizing: border-box;

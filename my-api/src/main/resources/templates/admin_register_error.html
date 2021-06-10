@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Sklep internetowy</title>
-    <link rel="stylesheet" th:href="@{/css/admin_main_page_css.css}">
+    <link rel="stylesheet" th:href="@{/css/admin_register_css.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 
@@ -14,12 +14,14 @@
         <form th:action="@{/logout}" method="post">
             <input class="logout_button" type="submit" value="Wyloguj się!"/>
         </form>
-        <form th:action="@{/new_admin}" method="post">
+        <form th:action="@{/showMainPage/new_admin}" method="post">
             <input class="windows" type="submit" value="Dodaj admina"/>
         </form>
     </ul>
 
 </div>
-
+<div class="loginbox2">
+    <h1>Błąd, podany login istnieje!</h1>
+</div>
 </body>
 </html>
