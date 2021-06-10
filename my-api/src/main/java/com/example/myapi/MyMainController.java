@@ -86,7 +86,7 @@ class MyMainController {
             String encodedPassword = encoder.encode(user.getPassword());
             user.setPassword(encodedPassword);
             user.setAdmin(true);
-            repo.save(user);
+            //repo.save(user);
         }
         catch(Exception e)
         {
