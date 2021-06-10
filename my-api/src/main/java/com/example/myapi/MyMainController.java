@@ -52,14 +52,18 @@ class MyMainController {
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = null;
         String firstName = null;
+        boolean admin = false;
         if(user instanceof CustomUserDetails)
         {
             username = ((CustomUserDetails)user).getUsername();
             firstName = ((CustomUserDetails)user).getFirstName();
-            System.out.println(username);
+            admin = ((CustomUserDetails)user).getAdmin();
         }
         model.addAttribute("username",username);
         model.addAttribute("firstName",firstName);
+        model.addAttribute("admin",admin);
+        System.out.println(admin);
+        if(admin) return "admin_main_page_layout";
         return "shop_main_page_layout";
     }
 }
