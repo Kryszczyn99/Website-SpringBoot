@@ -66,14 +66,14 @@ class MyMainController {
         if(admin) return "admin_main_page_layout";
         return "shop_main_page_layout";
     }
-    @PostMapping("/new_admin")
+    @PostMapping("/shopMainPage/new_admin")
     public String addingNewAdmin(Model model)
     {
         model.addAttribute("user",new User());
-        return "admin_add_new_admin_layout";
+        return "admin_register_new_admin_layout";
 
     }
-    @PostMapping("/new_admin_adding")
+    @PostMapping("/shopMainPage/new_admin_adding")
     public String addingNewAdminProcess(@RequestParam(name ="password") String pass,@RequestParam(name ="haslo2") String pass2,User user)
     {
         try

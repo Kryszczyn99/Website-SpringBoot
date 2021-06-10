@@ -76,3 +76,19 @@ body
 {
     background: #2bab0d;
 }
+.windows
+{
+    width: 120px;
+    height: 80px;
+    padding: 15px;
+    border: 2px solid white;
+    background: lightseagreen;
+    text-align: center;
+    color:white;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+.windows:hover
+{
+    background: #2bab0d;
+}
