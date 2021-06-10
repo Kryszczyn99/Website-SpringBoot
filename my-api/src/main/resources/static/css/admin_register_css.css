@@ -186,7 +186,7 @@ body
     height: 300px;
     background: rgba(0,0,0,0.5);
     color: #fff;
-    top: 20%;
+    top: 150px;
     left: 30%;
     position: absolute;
     box-sizing: border-box;
@@ -256,5 +256,25 @@ input::placeholder
 {
     color: antiquewhite;
 }
+.loginbox2 input
+{
+    width: 100%;
+    margin-bottom: 30px;
+}
 
-
+.loginbox2 input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+.loginbox2 input[type="submit"]:hover
+{
+    curson: pointer;
+    background: #ffc107;
+    color: #000;
+}
