@@ -66,4 +66,32 @@ class MyMainController {
         if(admin) return "admin_main_page_layout";
         return "shop_main_page_layout";
     }
+    @PostMapping("/new_admin")
+    public String addingNewAdmin(Model model)
+    {
+        model.addAttribute("user",new User());
+        return "admin_add_new_admin_layout";
+
+    }
+    @PostMapping("/new_admin_adding")
+    public String addingNewAdminProcess(@RequestParam(name ="password") String pass,@RequestParam(name ="haslo2") String pass2,User user)
+    {
+        try
+        {
+            if(!pass.equals(pass2))
+            {
+                return "admin_register_password_error";
+            }
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String encodedPassword = encoder.encode(user.getPassword());
+            user.setPassword(encodedPassword);
+            user.setAdmin(true);
+            repo.save(user);
+        }
+        catch(Exception e)
+        {
+            return "admin_register_error";
+        }
+        return "admin_register_success";
+    }
 }

@@ -10,9 +10,12 @@
 <body>
 <div class="menu-bar">
     <ul>
-        <input class="window_name" type="submit" th:value="Admin"/>
+        <input class="window_name" type="submit" th:value="'Admin panel'"/>
         <form th:action="@{/logout}" method="post">
             <input class="logout_button" type="submit" value="Wyloguj się!"/>
+        </form>
+        <form th:action="@{/new_admin}" method="post">
+            <input class="windows" type="submit" value="Dodaj admina"/>
         </form>
         <li><a href="elektronika.php">Elektronika </a></li>
         <li><a href="sport.php">Sport </a></li>
