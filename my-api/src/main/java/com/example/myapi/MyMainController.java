@@ -107,6 +107,13 @@ class MyMainController {
         return "shop_category_page_layout";
     }
 
+    @PostMapping("/shopMainPage/koszyk")
+    public String shopUserBasket()
+    {
+
+        return "shop_basket_page_layout";
+    }
+
     @PostMapping("/shopMainPage/new_admin")
     public String addingNewAdmin(Model model)
     {
