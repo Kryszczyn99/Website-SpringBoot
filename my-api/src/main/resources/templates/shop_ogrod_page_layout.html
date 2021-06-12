@@ -10,6 +10,7 @@
 <body>
 <div class="menu-bar">
     <ul>
+
         <input class="window_name" type="submit" th:value="'Witaj w naszym sklepie: '+ ${firstName}"/>
         <form th:action="@{/logout}" method="post">
             <input class="logout_button" type="submit" value="Wyloguj się!"/>
@@ -31,7 +32,8 @@
 <form action="dodanie_do_koszyka.php" method="post">
    <div class="container" th:each="item : ${items}">
         <div class="containerForImage">
-            <img th:src="${item.imageName}" class="image">
+<!--            <img th:src="@{/images/avatar.png}" class="avatar">-->
+            <img th:src="'/images/'+${item.imageName}" class="image">
         </div>
         <div class="containerForText">
             <p><u th:text="${item.itemName}"></u></p>
