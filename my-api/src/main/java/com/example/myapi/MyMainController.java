@@ -16,6 +16,9 @@ class MyMainController {
     @Autowired
     private UserRepository repo;
 
+    @Autowired
+    private ItemRepository repoItems;
+
     @GetMapping("")
     public String loginHomePage() {
         return "login";
@@ -48,7 +51,6 @@ class MyMainController {
     @GetMapping("/shopMainPage")
     public String loggingToShop(Model model)
     {
-
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = null;
         String firstName = null;
@@ -86,7 +88,7 @@ class MyMainController {
             String encodedPassword = encoder.encode(user.getPassword());
             user.setPassword(encodedPassword);
             user.setAdmin(true);
-            //repo.save(user);
+            repo.save(user);
         }
         catch(Exception e)
         {
