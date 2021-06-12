@@ -70,16 +70,43 @@ class MyMainController {
         if(admin) return "admin_main_page_layout";
         return "shop_main_page_layout";
     }
+
     @PostMapping("/shopMainPage/ogrod")
     public String shopUserGarden(Model model)
     {
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String firstName = ((CustomUserDetails)user).getFirstName();
         List<Item> list = repoItems.findItemByCategory("Ogród");
+        System.out.println(list);
         model.addAttribute("firstName",firstName);
         model.addAttribute("items",list);
-        return "shop_ogrod_page_layout";
+        return "shop_category_page_layout";
     }
+
+    @PostMapping("/shopMainPage/gaming")
+    public String shopUserGaming(Model model)
+    {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        List<Item> list = repoItems.findItemByCategory("Gaming");
+        System.out.println(list);
+        model.addAttribute("firstName",firstName);
+        model.addAttribute("items",list);
+        return "shop_category_page_layout";
+    }
+
+    @PostMapping("/shopMainPage/krzesla")
+    public String shopUserChair(Model model)
+    {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        List<Item> list = repoItems.findItemByCategory("Krzesła");
+        System.out.println(list);
+        model.addAttribute("firstName",firstName);
+        model.addAttribute("items",list);
+        return "shop_category_page_layout";
+    }
+
     @PostMapping("/shopMainPage/new_admin")
     public String addingNewAdmin(Model model)
     {
