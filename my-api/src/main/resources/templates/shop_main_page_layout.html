@@ -14,13 +14,17 @@
             <form th:action="@{/logout}" method="post">
                 <input class="logout_button" type="submit" value="Wyloguj się!"/>
             </form>
-            <li><a href="elektronika.php">Elektronika </a></li>
-            <li><a href="sport.php">Sport </a></li>
-            <li><a href="jedzenie.php">Jedzenie </a></li>
-            <li><a href="ogrod.php">Ogród </a></li>
-            <li><a href="rozrywka.php">Rozrywka i gaming  </a></li>
-            <li><a href="koszyk.php">Koszyk</a></li>
-            <li><a href="profil.php">Profil</a></li>
+            <form th:action="@{/shopMainPage/ogrod}" method="post">
+                <input class="windows" type="submit" value="Ogród"/>
+            </form>
+            <div class="wrap">
+                <div class="search">
+                    <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                    <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
 
         </ul>
 

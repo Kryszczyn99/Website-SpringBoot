@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8" />
+    <title>Sklep internetowy</title>
+    <link rel="stylesheet" th:href="@{/css/shop_category_page_css.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+<div class="menu-bar">
+    <ul>
+        <input class="window_name" type="submit" th:value="'Witaj w naszym sklepie: '+ ${firstName}"/>
+        <form th:action="@{/logout}" method="post">
+            <input class="logout_button" type="submit" value="Wyloguj się!"/>
+        </form>
+        <form th:action="@{/shopMainPage/ogrod}" method="post">
+            <input class="windows" type="submit" value="Ogród"/>
+        </form>
+        <div class="wrap">
+            <div class="search">
+                <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </ul>
+</div>
+
+<form action="dodanie_do_koszyka.php" method="post">
+   <div class="container" th:each="item : ${items}">
+        <div class="containerForImage">
+            <img th:src="${item.imageName}" class="image">
+        </div>
+        <div class="containerForText">
+            <p><u th:text="${item.itemName}"></u></p>
+            <div class="price" th:text="'Cena za sztukę: '+${item.price}+'zł'"></div>
+            <div class="description" th:text="${item.description}"></div>
+            <div class="purchase">
+                <input type="number" min="0" step="1" value="0" name="ilosc" id="ilosc" placeholder="0">
+            </div>
+            <div class="okbutton">
+                <input type="submit" value="DODAJ DO KOSZYKA!"/>
+                <input type="hidden" name="kategoria" value="sklep"/>
+                <input type="hidden" name="id_produktu" th:value="${item.id}"/>
+            </div>
+        </div>
+   </div>
+</form>
+</body>
+</html>

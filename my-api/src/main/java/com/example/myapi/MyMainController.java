@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 
 @Controller
 class MyMainController {
@@ -67,6 +69,16 @@ class MyMainController {
         System.out.println(admin);
         if(admin) return "admin_main_page_layout";
         return "shop_main_page_layout";
+    }
+    @PostMapping("/shopMainPage/ogrod")
+    public String shopUserGarden(Model model)
+    {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        List<Item> list = repoItems.findItemByCategory("Ogród");
+        model.addAttribute("firstName",firstName);
+        model.addAttribute("items",list);
+        return "shop_ogrod_page_layout";
     }
     @PostMapping("/shopMainPage/new_admin")
     public String addingNewAdmin(Model model)

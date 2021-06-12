@@ -200,3 +200,74 @@ body
     margin-top: 25px;
     margin-left: 20px;
 }
+.profile-main-container{
+    width: 800px;
+    height: 75px;
+    background-image: linear-gradient(to right,#deeaee,#FFFECF,#C3EBF9,#C2F5CF,#FFFECF);
+    border: 5px solid green;
+    margin: 0 auto;
+    margin-top: 50px;
+    font-size: 50px;
+    text-align: center;
+}
+.container {
+    width: 800px;
+    height: 200px;
+    background-image: linear-gradient(to right,#deeaee,#FFFECF,#C3EBF9,#C2F5CF,#FFFECF);
+    border: 5px solid green;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+.image {
+    height: 190px;
+    width: 250px;
+    border-right: 5px solid green;
+    float:left;
+}
+
+.containerForText {
+    float:center;
+    text-align: center;
+    margin: 15px;
+}
+.containerForPrice {
+    background-color: yellow;
+    float: center;
+}
+.price {
+    float: right;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.description {
+    margin-top: 50px;
+    font-size: 12px;
+}
+.purchase {
+    margin-top: 10px;
+}
+.purchase input {
+    width: 110px;
+    border: solid 2px green;
+}
+.okbutton {
+    margin-top:3px;
+}
+.okbutton input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 30px;
+    width: 135px;
+    margin-top: 15px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 10px;
+}
+.okbutton input[type="submit"]:hover
+{
+    curson: pointer;
+    background: #ffc107;
+    color: #000;
+}
