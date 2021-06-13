@@ -182,4 +182,31 @@ class MyMainController {
         model.addAttribute("firstName",firstName);
         return "shop_category_success_added";
     }
+
+    @PostMapping("/shopMainPage/deleteBasket")
+    public String deleteWholeBasket(Model model)
+    {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long idClient = ((CustomUserDetails)user).getId();
+        repoBasket.deleteEverythingFromUserBasket(idClient);
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        List<Basket> listBasket = repoBasket.findItemsByClientId(idClient);
+        List<Item> list = new ArrayList<>();
+        for(Basket b:listBasket)
+        {
+            Item item = repoItems.findItemById(b.getIdItem());
+            list.add(item);
+        }
+
+        model.addAttribute("firstName",firstName);
+        model.addAttribute("items",list);
+        model.addAttribute("rows",list.isEmpty());
+        return "shop_basket_page_layout";
+    }
+
+    @PostMapping("/shopMainPage/acceptBasket")
+    public String acceptBasket(Model model)
+    {
+        return "shop_basket_page_layout";
+    }
 }

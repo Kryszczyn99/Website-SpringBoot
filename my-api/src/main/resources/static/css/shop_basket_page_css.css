@@ -290,6 +290,8 @@ body
     outline: none;
     height: 50px;
     width: 250px;
+    float: left;
+    margin-left: 100px;
     background: #fb2525;
     color: #fff;
     font-size: 16px;

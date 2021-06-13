@@ -60,10 +60,12 @@
         </div>
     </div>
 </form>
-<div class="pay-container">
+<div th:if="${!rows}" class="pay-container">
     <p>Do zapłaty łącznie:</p>
-    <form action="koszyk_zatwierdzanie.php" method="post">
+    <form th:action="@{/shopMainPage/acceptBasket}" method="post">
         <input type="submit" name="akceptuj" value="ZAAKCEPTUJ TRANSAKCJĘ!"/>
+    </form>
+    <form th:action="@{/shopMainPage/deleteBasket}" method="post">
         <input type="submit" name="wyczysc" value="WYCZYŚĆ KOSZYK!"/>
     </form>
 </div>
