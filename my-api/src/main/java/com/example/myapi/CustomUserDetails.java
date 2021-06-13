@@ -33,6 +33,8 @@ public class CustomUserDetails implements UserDetails{
 
     boolean getAdmin() { return user.isAdmin(); }
 
+    Long getId(){ return user.getId(); }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

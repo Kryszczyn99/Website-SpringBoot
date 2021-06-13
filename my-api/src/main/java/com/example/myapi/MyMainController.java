@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -20,6 +22,9 @@ class MyMainController {
 
     @Autowired
     private ItemRepository repoItems;
+
+    @Autowired
+    private BasketRepository repoBasket;
 
     @GetMapping("")
     public String loginHomePage() {
@@ -108,9 +113,23 @@ class MyMainController {
     }
 
     @PostMapping("/shopMainPage/koszyk")
-    public String shopUserBasket()
+    public String shopUserBasket(Model model)
     {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        Long id_client = ((CustomUserDetails)user).getId();
+        List<Basket> listBasket = repoBasket.findItemsByClientId(id_client);
+        List<Item> list = new ArrayList<>();
+        for(Basket b:listBasket)
+        {
+           Item item = repoItems.findItemById(b.getIdItem());
+           list.add(item);
+        }
 
+        System.out.println(listBasket);
+        System.out.println(list);
+        model.addAttribute("firstName",firstName);
+        model.addAttribute("items",list);
         return "shop_basket_page_layout";
     }
 

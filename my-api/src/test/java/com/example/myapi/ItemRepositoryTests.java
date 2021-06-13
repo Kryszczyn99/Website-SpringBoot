@@ -27,4 +27,11 @@ public class ItemRepositoryTests {
         System.out.println(list);
         assertThat(list).isNotNull();
     }
+    @Test
+    public void testFindItemById()
+    {
+        Long id = 11L;
+        Item item = repo.findItemById(id);
+        System.out.println(item);
+    }
 }

@@ -11,10 +11,10 @@ public class Basket {
     private Long id;
 
     @Column(nullable = false,name="id_klient")
-    private int idClient;
+    private Long idClient;
 
     @Column(nullable = false,name="id_item")
-    private int idItem;
+    private Long idItem;
 
     @Column(nullable = false,name="liczba_sztuk")
     private int itemCountered;
@@ -27,19 +27,19 @@ public class Basket {
         this.id = id;
     }
 
-    public int getIdClient() {
+    public Long getIdClient() {
         return idClient;
     }
 
-    public void setIdClient(int idClient) {
+    public void setIdClient(Long idClient) {
         this.idClient = idClient;
     }
 
-    public int getIdItem() {
+    public Long getIdItem() {
         return idItem;
     }
 
-    public void setIdItem(int idItem) {
+    public void setIdItem(Long idItem) {
         this.idItem = idItem;
     }
 

@@ -8,5 +8,5 @@ import java.util.List;
 public interface BasketRepository extends JpaRepository<Basket,Long> {
 
     @Query("SELECT i FROM Basket i WHERE i.idClient = ?1")
-    List<Basket> findItemsByClientId(int client);
+    List<Basket> findItemsByClientId(Long client);
 }

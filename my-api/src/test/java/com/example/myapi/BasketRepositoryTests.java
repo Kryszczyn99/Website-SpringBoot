@@ -21,7 +21,7 @@ public class BasketRepositoryTests {
     @Test
     public void testFindUserBasketById()
     {
-        int idWeLookFor = 27;
+        Long idWeLookFor = 27L;
         List<Basket> list = repo.findItemsByClientId(idWeLookFor);
         System.out.println(list);
     }
