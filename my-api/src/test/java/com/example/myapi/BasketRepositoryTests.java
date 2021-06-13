@@ -25,4 +25,20 @@ public class BasketRepositoryTests {
         List<Basket> list = repo.findItemsByClientId(idWeLookFor);
         System.out.println(list);
     }
+    @Test
+    public void testFindItemFromBasketByIds()
+    {
+        Long idClient = 27L;
+        Long idItem = 21L;
+        Basket basket = repo.findItemByClientIdAndItemId(idItem,idClient);
+        System.out.println(basket);
+    }
+
+    @Test
+    public void testUpdateDatabaseBasket()
+    {
+        Long idClient = 27L;
+        Long idItem = 21L;
+        repo.updateCounterInDatabaseBasketUser(10,idClient,idItem);
+    }
 }

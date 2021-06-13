@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Sklep internetowy</title>
-    <link rel="stylesheet" th:href="@{/css/shop_basket_page_css.css}">
+    <link rel="stylesheet" th:href="@{/css/shop_category_page_css.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 
@@ -37,34 +37,11 @@
         </div>
     </ul>
 </div>
-<div class="profile-main-container">
-    <p th:if="${rows}">Twój koszyk jest pusty.</p>
-    <p th:if="${!rows}">Przedmioty w Twoim koszyku.</p>
-</div>
-<form action="dodanie_do_koszyka.php" th:each="item : ${items}" method="post">
-    <div class="container" >
-        <div class="containerForImage">
-            <img th:src="'../images/'+${item.imageName}" class="image">
-        </div>
-        <div class="containerForText">
-            <p><u th:text="${item.itemName}"></u></p>
-            <div class="price" th:text="'Cena za sztukę: '+${item.price}+'zł'"></div>
-            <div class="description" th:text="${item.description}"></div>
-            <div class="purchase">
-                <input type="number" min="0" step="1" value="0" name="ilosc" id="ilosc" placeholder="0">
-            </div>
-            <div class="okbutton">
-                <input type="submit" value="DODAJ DO KOSZYKA!"/>
-                <input type="hidden" name="id_produktu" th:value="${item.id}"/>
-            </div>
-        </div>
-    </div>
-</form>
-<div class="pay-container">
-    <p>Do zapłaty łącznie:</p>
-    <form action="koszyk_zatwierdzanie.php" method="post">
-        <input type="submit" name="akceptuj" value="ZAAKCEPTUJ TRANSAKCJĘ!"/>
-        <input type="submit" name="wyczysc" value="WYCZYŚĆ KOSZYK!"/>
+<div class="loginbox2">
+
+    <h1>Dodano do koszyka!</h1>
+    <form th:action="@{/shopMainPage}" method="get">
+        <input type="submit" value="OK!" />
     </form>
 </div>
 <br>

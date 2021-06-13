@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -71,7 +72,6 @@ class MyMainController {
         model.addAttribute("username",username);
         model.addAttribute("firstName",firstName);
         model.addAttribute("admin",admin);
-        System.out.println(admin);
         if(admin) return "admin_main_page_layout";
         return "shop_main_page_layout";
     }
@@ -82,7 +82,6 @@ class MyMainController {
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String firstName = ((CustomUserDetails)user).getFirstName();
         List<Item> list = repoItems.findItemByCategory("Ogród");
-        System.out.println(list);
         model.addAttribute("firstName",firstName);
         model.addAttribute("items",list);
         return "shop_category_page_layout";
@@ -94,7 +93,6 @@ class MyMainController {
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String firstName = ((CustomUserDetails)user).getFirstName();
         List<Item> list = repoItems.findItemByCategory("Gaming");
-        System.out.println(list);
         model.addAttribute("firstName",firstName);
         model.addAttribute("items",list);
         return "shop_category_page_layout";
@@ -106,7 +104,6 @@ class MyMainController {
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String firstName = ((CustomUserDetails)user).getFirstName();
         List<Item> list = repoItems.findItemByCategory("Krzesła");
-        System.out.println(list);
         model.addAttribute("firstName",firstName);
         model.addAttribute("items",list);
         return "shop_category_page_layout";
@@ -126,10 +123,9 @@ class MyMainController {
            list.add(item);
         }
 
-        System.out.println(listBasket);
-        System.out.println(list);
         model.addAttribute("firstName",firstName);
         model.addAttribute("items",list);
+        model.addAttribute("rows",list.isEmpty());
         return "shop_basket_page_layout";
     }
 
@@ -160,5 +156,30 @@ class MyMainController {
             return "admin_register_error";
         }
         return "admin_register_success";
+    }
+
+    @PostMapping("/shopMainPage/addToBasket")
+    public String addItemToUserBasket(@RequestParam(name ="ilosc") int count, @RequestParam(name ="id_produktu") Long idItem, Basket basket, Model model)
+    {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long idClient = ((CustomUserDetails)user).getId();
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        Basket doesItExistInBasket = repoBasket.findItemByClientIdAndItemId(idItem,idClient);
+        if(doesItExistInBasket!=null)
+        {
+            int oldCount = doesItExistInBasket.getItemCountered();
+            int newCount = oldCount+count;
+            repoBasket.updateCounterInDatabaseBasketUser(newCount,idClient,idItem);
+
+        }
+        else
+        {
+            basket.setItemCountered(count);
+            basket.setIdClient(idClient);
+            basket.setIdItem(idItem);
+            repoBasket.save(basket);
+        }
+        model.addAttribute("firstName",firstName);
+        return "shop_category_success_added";
     }
 }

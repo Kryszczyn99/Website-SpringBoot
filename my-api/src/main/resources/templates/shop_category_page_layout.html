@@ -38,8 +38,8 @@
     </ul>
 </div>
 
-<form action="dodanie_do_koszyka.php" method="post">
-   <div class="container" th:each="item : ${items}">
+<form th:action="@{/shopMainPage/addToBasket}" th:each="item : ${items}" method="post">
+   <div class="container">
         <div class="containerForImage">
             <img th:src="'../images/'+${item.imageName}" class="image">
         </div>
@@ -52,7 +52,6 @@
             </div>
             <div class="okbutton">
                 <input type="submit" value="DODAJ DO KOSZYKA!"/>
-                <input type="hidden" name="kategoria" value="sklep"/>
                 <input type="hidden" name="id_produktu" th:value="${item.id}"/>
             </div>
         </div>
