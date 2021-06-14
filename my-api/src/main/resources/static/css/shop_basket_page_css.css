@@ -303,3 +303,53 @@ body
     background: #ffc107;
     color: #000;
 }
+.okbutton input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 30px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 10px;
+}
+.okbutton input[type="submit"]:hover
+{
+    curson: pointer;
+    background: #ffc107;
+    color: #000;
+}
+.modify
+{
+    margin-top:10px;
+}
+.modify input[type="submit"]
+{
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    height: 30px;
+    width: 120px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 10px;
+}
+.modify input[name="button"]
+{
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    height: 30px;
+    width: 100px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 10px;
+}
+.modify input[type="submit"]:hover
+{
+    curson: pointer;
+    background: #ffc107;
+    color: #000;
+}

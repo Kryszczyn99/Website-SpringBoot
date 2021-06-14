@@ -30,36 +30,22 @@
         <form th:action="@{/shopMainPage/findItems}" method="post">
             <div class="wrap">
                 <div class="search">
-                    <input type="text" class="searchTerm" name="search"  placeholder="What are you looking for?">
+                    <input type="text" class="searchTerm" name="search" placeholder="What are you looking for?">
                     <button type="submit" class="searchButton">
                         <i class="fa fa-search"></i>
                     </button>
                 </div>
             </div>
         </form>
-
     </ul>
 </div>
+<div class="loginbox2">
 
-<form th:action="@{/shopMainPage/addToBasket}" th:each="item : ${items}" method="post">
-   <div class="container">
-        <div class="containerForImage">
-            <img th:src="'../images/'+${item.imageName}" class="image">
-        </div>
-        <div class="containerForText">
-            <p><u th:text="${item.itemName}"></u></p>
-            <div class="price" th:text="'Cena za sztukę: '+${item.price}+'zł'"></div>
-            <div class="description" th:text="${item.description}"></div>
-            <div class="purchase">
-                <input type="number" min="0" step="1" value="0" name="ilosc" id="ilosc" placeholder="0">
-            </div>
-            <div class="okbutton">
-                <input type="submit" value="DODAJ DO KOSZYKA!"/>
-                <input type="hidden" name="id_produktu" th:value="${item.id}"/>
-            </div>
-        </div>
-   </div>
-</form>
+    <h1>Nic nie wpisałeś!</h1>
+    <form th:action="@{/shopMainPage}" method="get">
+        <input type="submit" value="OK!" />
+    </form>
+</div>
 <br>
 <br>
 <br>

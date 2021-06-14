@@ -11,4 +11,7 @@ public interface ItemRepository extends JpaRepository<Item,Long> {
     List<Item> findItemByCategory(String category);
     @Query("SELECT i FROM Item i WHERE i.id=?1")
     Item findItemById(Long id);
+
+    @Query("SELECT i FROM Item i WHERE UPPER(i.itemName)  LIKE %?1%")
+    List<Item> findItemsByLetters(String letters);
 }

@@ -15,8 +15,11 @@ public class BasketItemDisplay {
     private Long idItem;
     private int itemCountered;
 
+    private double totalCost;
 
-    BasketItemDisplay(Item i, Basket b)
+
+
+    BasketItemDisplay(Item i, Basket b, double tc)
     {
         this.id = i.getId();
         this.itemName = i.getItemName();
@@ -28,6 +31,8 @@ public class BasketItemDisplay {
         this.idClient = b.getIdClient();
         this.idItem = b.getIdItem();
         this.itemCountered = b.getItemCountered();
+
+        this.totalCost = tc;
 
     }
 
@@ -100,5 +105,13 @@ public class BasketItemDisplay {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
     }
 }

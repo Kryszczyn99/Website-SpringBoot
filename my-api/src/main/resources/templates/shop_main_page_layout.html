@@ -26,14 +26,16 @@
             <form th:action="@{/shopMainPage/koszyk}" method="post">
                 <input class="windows" type="submit" value="Koszyk"/>
             </form>
-            <div class="wrap">
-                <div class="search">
-                    <input type="text" class="searchTerm" placeholder="What are you looking for?">
-                    <button type="submit" class="searchButton">
-                        <i class="fa fa-search"></i>
-                    </button>
+            <form th:action="@{/shopMainPage/findItems}" method="post">
+                <div class="wrap">
+                    <div class="search">
+                        <input type="text" class="searchTerm" name="search"  placeholder="What are you looking for?">
+                        <button type="submit" class="searchButton">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
 
         </ul>
 

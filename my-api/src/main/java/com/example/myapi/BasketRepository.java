@@ -23,4 +23,9 @@ public interface BasketRepository extends JpaRepository<Basket,Long> {
     @Modifying()
     @Query("DELETE FROM Basket i WHERE i.idClient=?1")
     void deleteEverythingFromUserBasket(Long idClient);
+
+    @Transactional
+    @Modifying()
+    @Query("DELETE FROM Basket i WHERE i.idClient=?1 AND i.idItem=?2")
+    void deleteItemFromUserBasket(Long idClient, Long idItem);
 }

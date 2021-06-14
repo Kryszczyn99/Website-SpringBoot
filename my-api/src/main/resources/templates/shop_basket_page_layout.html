@@ -27,42 +27,47 @@
         <form th:action="@{/shopMainPage/koszyk}" method="post">
             <input class="windows" type="submit" value="Koszyk"/>
         </form>
-        <div class="wrap">
-            <div class="search">
-                <input type="text" class="searchTerm" placeholder="What are you looking for?">
-                <button type="submit" class="searchButton">
-                    <i class="fa fa-search"></i>
-                </button>
+        <form th:action="@{/shopMainPage/findItems}" method="post">
+            <div class="wrap">
+                <div class="search">
+                    <input type="text" class="searchTerm" name="search"  placeholder="What are you looking for?">
+                    <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
     </ul>
 </div>
 <div class="profile-main-container">
     <p th:if="${rows}">Twój koszyk jest pusty.</p>
     <p th:if="${!rows}">Przedmioty w Twoim koszyku.</p>
 </div>
-<form action="dodanie_do_koszyka.php" th:each="item : ${items}" method="post">
+<form th:action="@{/shopMainPage/oneItemAction}" th:each="item : ${items}" method="post">
     <div class="container" >
         <div class="containerForImage">
             <img th:src="'../images/'+${item.imageName}" class="image">
         </div>
         <div class="containerForText">
             <p><u th:text="${item.itemName}"></u></p>
-            <div class="price" th:text="'Cena za sztukę: '+${item.price}+'zł'"></div>
+            <div class="price" th:text="'Koszt: '+${item.totalCost}+'zł'"></div>
             <div class="description" th:text="${item.description}"></div>
             <div class="purchase">
-<!--                <p>Zmień ilość tutaj: </p>-->
+                 Zmień ilość tutaj:
                 <input type="number" min="0" step="1" th:value="${item.itemCountered}" name="ilosc" id="ilosc" placeholder="0">
             </div>
-            <div class="okbutton">
-                <input type="submit" value="DODAJ DO KOSZYKA!"/>
-                <input type="hidden" name="id_produktu" th:value="${item.id}"/>
+            <div class="buttons">
+                <div class="modify">
+                    <input type="submit" name="button" value="MODYFIKUJ!"/>
+                    <input type="submit" name="button" value="USUŃ Z KOSZYKA!"/>
+                    <input type="hidden" name="id_produktu" th:value="${item.id}"/>
+                </div>
             </div>
         </div>
     </div>
 </form>
 <div th:if="${!rows}" class="pay-container">
-    <p>Do zapłaty łącznie:</p>
+    <p th:text="'Do zapłaty łącznie: '+${totalCost}+'zł'"></p>
     <form th:action="@{/shopMainPage/acceptBasket}" method="post">
         <input type="submit" name="akceptuj" value="ZAAKCEPTUJ TRANSAKCJĘ!"/>
     </form>

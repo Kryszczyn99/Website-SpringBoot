@@ -116,15 +116,21 @@ class MyMainController {
         List<Basket> listBasket = repoBasket.findItemsByClientId(id_client);
         //List<Item> list = new ArrayList<>();
         List<BasketItemDisplay> list = new ArrayList<>();
+        double totalCost = 0.0;
         for(Basket b:listBasket)
         {
            Item item = repoItems.findItemById(b.getIdItem());
-           BasketItemDisplay temp = new BasketItemDisplay(item,b);
+           double value = item.getPrice()*b.getItemCountered();
+           double rounded = Math.round(value*100.0)/100.0;
+            totalCost+=rounded;
+           System.out.println(value +" "+ rounded);
+           BasketItemDisplay temp = new BasketItemDisplay(item,b,rounded);
            list.add(temp);
         }
         model.addAttribute("firstName",firstName);
         model.addAttribute("items",list);
         model.addAttribute("rows",list.isEmpty());
+        model.addAttribute("totalCost",Math.round(totalCost*100.0)/100.0);
         return "shop_basket_page_layout";
     }
 
@@ -164,14 +170,14 @@ class MyMainController {
         Long idClient = ((CustomUserDetails)user).getId();
         String firstName = ((CustomUserDetails)user).getFirstName();
         Basket doesItExistInBasket = repoBasket.findItemByClientIdAndItemId(idItem,idClient);
-        if(doesItExistInBasket!=null)
+        if(doesItExistInBasket!=null && count>0)
         {
             int oldCount = doesItExistInBasket.getItemCountered();
             int newCount = oldCount+count;
             repoBasket.updateCounterInDatabaseBasketUser(newCount,idClient,idItem);
 
         }
-        else
+        else if(count>0)
         {
             basket.setItemCountered(count);
             basket.setIdClient(idClient);
@@ -179,6 +185,7 @@ class MyMainController {
             repoBasket.save(basket);
         }
         model.addAttribute("firstName",firstName);
+        if(count==0) return "shop_category_zero";
         return "shop_category_success_added";
     }
 
@@ -189,17 +196,8 @@ class MyMainController {
         Long idClient = ((CustomUserDetails)user).getId();
         repoBasket.deleteEverythingFromUserBasket(idClient);
         String firstName = ((CustomUserDetails)user).getFirstName();
-        List<Basket> listBasket = repoBasket.findItemsByClientId(idClient);
-        List<Item> list = new ArrayList<>();
-        for(Basket b:listBasket)
-        {
-            Item item = repoItems.findItemById(b.getIdItem());
-            list.add(item);
-        }
-
         model.addAttribute("firstName",firstName);
-        model.addAttribute("items",list);
-        model.addAttribute("rows",list.isEmpty());
+        model.addAttribute("rows",true);
         return "shop_basket_page_layout";
     }
 
@@ -207,5 +205,58 @@ class MyMainController {
     public String acceptBasket(Model model)
     {
         return "shop_basket_page_layout";
+    }
+
+    @PostMapping("/shopMainPage/oneItemAction")
+    public String actionOnItemInBasket(Model model, HttpServletRequest request,@RequestParam(name ="id_produktu") Long idItem,@RequestParam(name ="ilosc") int count)
+    {
+        String op = request.getParameter("button");
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long idClient = ((CustomUserDetails)user).getId();
+        if(op.equals("MODYFIKUJ!"))
+        {
+            repoBasket.updateCounterInDatabaseBasketUser(count,idClient,idItem);
+        }
+        else if(op.equals("USUŃ Z KOSZYKA!"))
+        {
+            repoBasket.deleteItemFromUserBasket(idClient,idItem);
+
+        }
+
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        List<Basket> listBasket = repoBasket.findItemsByClientId(idClient);
+        List<BasketItemDisplay> list = new ArrayList<>();
+        double totalCost = 0.0;
+        for(Basket b:listBasket)
+        {
+            Item item = repoItems.findItemById(b.getIdItem());
+            double value = item.getPrice()*b.getItemCountered();
+            double rounded = Math.round(value*100.0)/100.0;
+            totalCost+=rounded;
+            System.out.println(value +" "+ rounded);
+            BasketItemDisplay temp = new BasketItemDisplay(item,b,rounded);
+            list.add(temp);
+        }
+        model.addAttribute("firstName",firstName);
+        model.addAttribute("items",list);
+        model.addAttribute("rows",list.isEmpty());
+        model.addAttribute("totalCost",Math.round(totalCost*100.0)/100.0);
+        return "shop_basket_page_layout";
+    }
+    @PostMapping("/shopMainPage/findItems")
+    public String findItemsByLetters(@RequestParam(name ="search") String text, Model model)
+    {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        String textUpper = text.toUpperCase(Locale.ROOT);
+        if(textUpper.isEmpty())
+        {
+            model.addAttribute("firstName",firstName);
+            return "shop_search_empty_error";
+        }
+        List<Item> list = repoItems.findItemsByLetters(textUpper);
+        model.addAttribute("firstName",firstName);
+        model.addAttribute("items",list);
+        return "shop_category_page_layout";
     }
 }
