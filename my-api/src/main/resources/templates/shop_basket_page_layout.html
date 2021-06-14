@@ -51,7 +51,8 @@
             <div class="price" th:text="'Cena za sztukę: '+${item.price}+'zł'"></div>
             <div class="description" th:text="${item.description}"></div>
             <div class="purchase">
-                <input type="number" min="0" step="1" value="0" name="ilosc" id="ilosc" placeholder="0">
+<!--                <p>Zmień ilość tutaj: </p>-->
+                <input type="number" min="0" step="1" th:value="${item.itemCountered}" name="ilosc" id="ilosc" placeholder="0">
             </div>
             <div class="okbutton">
                 <input type="submit" value="DODAJ DO KOSZYKA!"/>

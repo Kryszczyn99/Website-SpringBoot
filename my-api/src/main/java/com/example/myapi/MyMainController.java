@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 @Controller
@@ -116,13 +114,14 @@ class MyMainController {
         String firstName = ((CustomUserDetails)user).getFirstName();
         Long id_client = ((CustomUserDetails)user).getId();
         List<Basket> listBasket = repoBasket.findItemsByClientId(id_client);
-        List<Item> list = new ArrayList<>();
+        //List<Item> list = new ArrayList<>();
+        List<BasketItemDisplay> list = new ArrayList<>();
         for(Basket b:listBasket)
         {
            Item item = repoItems.findItemById(b.getIdItem());
-           list.add(item);
+           BasketItemDisplay temp = new BasketItemDisplay(item,b);
+           list.add(temp);
         }
-
         model.addAttribute("firstName",firstName);
         model.addAttribute("items",list);
         model.addAttribute("rows",list.isEmpty());
