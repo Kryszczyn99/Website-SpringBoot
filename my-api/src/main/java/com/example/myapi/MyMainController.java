@@ -302,6 +302,11 @@ class MyMainController {
         model.addAttribute("phones",list);
         return "shop_phone_profile";
     }
-
+    @PostMapping("/shopMainPage/adres")
+    public String adressMainProfile(Model model)
+    {
+        
+        return "shop_phone_profile";
+    }
 
 }
