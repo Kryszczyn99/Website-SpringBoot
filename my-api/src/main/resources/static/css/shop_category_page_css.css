@@ -312,3 +312,80 @@ h1
     text-align: center;
     font-size: 30px;
 }
+.profile-number-container{
+    width: 600px;
+    height: 75px;
+    background-image: linear-gradient(to right,#deeaee,#FFFECF,#C3EBF9,#C2F5CF,#FFFECF);
+    border: 5px solid green;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 25px;
+    text-align: center;
+}
+.number-area{
+    margin-top: 17px;
+    margin-left: 75px;
+    float: left;
+}
+.button-area{
+    text-align: right;
+    float: right;
+}
+
+.button-area input[type="submit"]
+{
+    margin-top: 11px;
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 150px;
+    margin-right: 75px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 20px;
+}
+.button-area input[type="submit"]:hover
+{
+    curson: pointer;
+    background: #ffc107;
+    color: #000;
+}
+.input_phone input[type="text"]
+{
+    float: left;
+    width: 250px;
+    height: 35px;
+    margin-top: 13px;
+    margin-left: 20px;
+}
+.container-for-orders
+{
+    width: 800px;
+    height: 75px;
+    background-image: linear-gradient(to right,#deeaee,#FFFECF,#C3EBF9,#C2F5CF,#FFFECF);
+    border: 5px solid green;
+    margin: 0 auto;
+    margin-top: 50px;
+    font-size: 42px;
+    text-align: center;
+}
+.container-for-orders input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 65px;
+    font-style: italic;
+    font-weight: bold;
+    width: 790px;
+    margin-right: 75px;
+    background-image: linear-gradient(to right,#deeaee,#FFFECF,#C3EBF9,#C2F5CF,#FFFECF);
+    color: black;
+    font-size: 40px;
+}
+.container-for-orders input[type="submit"]:hover
+{
+    curson: pointer;
+    background: #ffc107;
+    color: #000;
+}

@@ -25,6 +25,9 @@ class MyMainController {
     @Autowired
     private BasketRepository repoBasket;
 
+    @Autowired
+    private PhoneNumberRepository repoPhone;
+
     @GetMapping("")
     public String loginHomePage() {
         return "login";
@@ -259,4 +262,46 @@ class MyMainController {
         model.addAttribute("items",list);
         return "shop_category_page_layout";
     }
+
+    @PostMapping("/shopMainPage/telefon")
+    public String phoneNumberProfile(Model model)
+    {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        Long idClient = ((CustomUserDetails)user).getId();
+        List<PhoneNumber> list = repoPhone.findPhoneNumbersByClientId(idClient);
+        model.addAttribute("firstName",firstName);
+        model.addAttribute("phones",list);
+        return "shop_phone_profile";
+    }
+
+    @PostMapping("/shopMainPage/deleteNumber")
+    public String phoneNumberProfileDelete(Model model,@RequestParam(name ="uniqueID") Long id)
+    {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        Long idClient = ((CustomUserDetails)user).getId();
+        repoPhone.deletePhoneFromBook(idClient,id);
+        List<PhoneNumber> list = repoPhone.findPhoneNumbersByClientId(idClient);
+        model.addAttribute("firstName",firstName);
+        model.addAttribute("phones",list);
+        return "shop_phone_profile";
+    }
+    @PostMapping("/shopMainPage/addNumber")
+    public String phoneNumberProfileAdding(Model model,@RequestParam(name ="phone") String newNumber)
+    {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        Long idClient = ((CustomUserDetails)user).getId();
+        PhoneNumber ph = new PhoneNumber();
+        ph.setIdClient(idClient);
+        ph.setPhone(newNumber);
+        repoPhone.save(ph);
+        List<PhoneNumber> list = repoPhone.findPhoneNumbersByClientId(idClient);
+        model.addAttribute("firstName",firstName);
+        model.addAttribute("phones",list);
+        return "shop_phone_profile";
+    }
+
+
 }

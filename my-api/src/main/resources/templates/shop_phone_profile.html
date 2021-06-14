@@ -40,28 +40,29 @@
                 </div>
             </div>
         </form>
-
     </ul>
 </div>
-
-<form th:action="@{/shopMainPage/addToBasket}" th:each="item : ${items}" method="post">
-   <div class="container">
-        <div class="containerForImage">
-            <img th:src="'../images/'+${item.imageName}" class="image">
+<div class="profile-main-container">
+    Twoje numery telefonów.
+</div>
+<form th:action="@{/shopMainPage/deleteNumber}" th:each="number:${phones}" method="post">
+    <div class="profile-number-container">
+        <div class="number-area"><b th:text="${number.phone}"></b></div>
+        <div class="button-area">
+            <input type="submit" name="submit" value="USUŃ NUMER!"/>
+            <input type="hidden" name="uniqueID" th:value="${number.id}" />
         </div>
-        <div class="containerForText">
-            <p><u th:text="${item.itemName}"></u></p>
-            <div class="price" th:text="'Cena za sztukę: '+${item.price}+'zł'"></div>
-            <div class="description" th:text="${item.description}"></div>
-            <div class="purchase">
-                <input type="number" min="0" step="1" value="0" name="ilosc" id="ilosc" placeholder="0">
-            </div>
-            <div class="okbutton">
-                <input type="submit" value="DODAJ DO KOSZYKA!"/>
-                <input type="hidden" name="id_produktu" th:value="${item.id}"/>
-            </div>
+    </div>
+</form>
+<form th:action="@{/shopMainPage/addNumber}" method="post">
+    <div class="profile-number-container">
+        <div class="input_phone">
+            <input type="text" name="phone" placeholder="Podaj numer telefonu: ">
         </div>
-   </div>
+        <div class="button-area">
+            <input type="submit" value="DODAJ NUMER!"/>
+        </div>
+    </div>
 </form>
 <br>
 <br>
