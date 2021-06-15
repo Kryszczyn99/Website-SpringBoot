@@ -26,7 +26,7 @@ public class Addresses {
     @Column(nullable = false,name="numer_ulicy",length = 10)
     private String streetNumber;
 
-    @Column(nullable = false,name="numer_lokalu",length = 10)
+    @Column(name="numer_lokalu",length = 10)
     private String apartmentNumber;
 
     @Column(nullable = false,name="kod_pocztowy")

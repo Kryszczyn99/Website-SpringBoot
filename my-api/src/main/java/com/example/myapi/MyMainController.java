@@ -28,6 +28,9 @@ class MyMainController {
     @Autowired
     private PhoneNumberRepository repoPhone;
 
+    @Autowired
+    private AddressesRepository repoAdresses;
+
     @GetMapping("")
     public String loginHomePage() {
         return "login";
@@ -263,16 +266,20 @@ class MyMainController {
         return "shop_category_page_layout";
     }
 
-    @PostMapping("/shopMainPage/telefon")
+    @PostMapping("/shopMainPage/profile")
     public String phoneNumberProfile(Model model)
     {
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String firstName = ((CustomUserDetails)user).getFirstName();
         Long idClient = ((CustomUserDetails)user).getId();
+
+        List<Addresses> listAd = repoAdresses.findAddressesByClientId(idClient);
+
         List<PhoneNumber> list = repoPhone.findPhoneNumbersByClientId(idClient);
         model.addAttribute("firstName",firstName);
         model.addAttribute("phones",list);
-        return "shop_phone_profile";
+        model.addAttribute("adresses",listAd);
+        return "shop_profile";
     }
 
     @PostMapping("/shopMainPage/deleteNumber")
@@ -282,10 +289,12 @@ class MyMainController {
         String firstName = ((CustomUserDetails)user).getFirstName();
         Long idClient = ((CustomUserDetails)user).getId();
         repoPhone.deletePhoneFromBook(idClient,id);
+        List<Addresses> listAd = repoAdresses.findAddressesByClientId(idClient);
         List<PhoneNumber> list = repoPhone.findPhoneNumbersByClientId(idClient);
         model.addAttribute("firstName",firstName);
         model.addAttribute("phones",list);
-        return "shop_phone_profile";
+        model.addAttribute("adresses",listAd);
+        return "shop_profile";
     }
     @PostMapping("/shopMainPage/addNumber")
     public String phoneNumberProfileAdding(Model model,@RequestParam(name ="phone") String newNumber)
@@ -297,16 +306,69 @@ class MyMainController {
         ph.setIdClient(idClient);
         ph.setPhone(newNumber);
         repoPhone.save(ph);
+        List<Addresses> listAd = repoAdresses.findAddressesByClientId(idClient);
         List<PhoneNumber> list = repoPhone.findPhoneNumbersByClientId(idClient);
         model.addAttribute("firstName",firstName);
         model.addAttribute("phones",list);
-        return "shop_phone_profile";
+        model.addAttribute("adresses",listAd);
+        return "shop_profile";
     }
-    @PostMapping("/shopMainPage/adres")
-    public String adressMainProfile(Model model)
+    @PostMapping("/shopMainPage/adresDelete")
+    public String adressMainProfile(Model model,@RequestParam(name ="uniqueID") Long id)
     {
-        
-        return "shop_phone_profile";
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        Long idClient = ((CustomUserDetails)user).getId();
+        repoAdresses.deleteAddressFromDatabase(idClient,id);
+        List<Addresses> listAd = repoAdresses.findAddressesByClientId(idClient);
+        List<PhoneNumber> list = repoPhone.findPhoneNumbersByClientId(idClient);
+        model.addAttribute("firstName",firstName);
+        model.addAttribute("phones",list);
+        model.addAttribute("adresses",listAd);
+        return "shop_profile";
     }
+    @PostMapping("/shopMainPage/adresAdd")
+    public String addressAdding(Model model)
+    {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        Long idClient = ((CustomUserDetails)user).getId();
+        model.addAttribute("firstName",firstName);
+        return "shop_add_address";
+    }
+    @PostMapping("/shopMainpage/addingAddress")
+    public String addressAddOperation(Model model,
+                                      @RequestParam(name ="email") String email,
+                                      @RequestParam(name ="miasto") String city,
+                                      @RequestParam(name ="kod1") String zip1,
+                                      @RequestParam(name ="kod2") String zip2,
+                                      @RequestParam(name ="ulica") String street,
+                                      @RequestParam(name ="nrulicy") String streetNb,
+                                      @RequestParam(name ="lokal") String apartment)
+    {
 
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        Long idClient = ((CustomUserDetails)user).getId();
+        Addresses adNew = new Addresses();
+        adNew.setCity(city);
+        if(apartment.isEmpty()) adNew.setApartmentNumber(null);
+        else adNew.setApartmentNumber(apartment);
+        adNew.setIdClient(idClient);
+        adNew.setEmail(email);
+        adNew.setStreet(street);
+        adNew.setStreetNumber(streetNb);
+        int tempZip1 = Integer.parseInt(zip1);
+        int tempZip2 = Integer.parseInt(zip2);
+        int totalZip = tempZip1*1000+tempZip2;
+        adNew.setZipCode(totalZip);
+        repoAdresses.save(adNew);
+
+        List<Addresses> listAd = repoAdresses.findAddressesByClientId(idClient);
+        List<PhoneNumber> list = repoPhone.findPhoneNumbersByClientId(idClient);
+        model.addAttribute("firstName",firstName);
+        model.addAttribute("phones",list);
+        model.addAttribute("adresses",listAd);
+        return "shop_profile";
+    }
 }

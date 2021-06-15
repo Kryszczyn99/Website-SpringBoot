@@ -11,7 +11,9 @@
 <div class="menu-bar">
     <ul>
 
-        <input class="window_name" type="submit" th:value="'Witaj w naszym sklepie: '+ ${firstName}"/>
+        <form th:action="@{/shopMainPage/profile}" method="post">
+            <input class="window_name" type="submit" th:value="'Witaj w naszym sklepie: '+ ${firstName}"/>
+        </form>
         <form th:action="@{/logout}" method="post">
             <input class="logout_button" type="submit" value="Wyloguj się!"/>
         </form>
@@ -26,12 +28,6 @@
         </form>
         <form th:action="@{/shopMainPage/koszyk}" method="post">
             <input class="windows" type="submit" value="Koszyk"/>
-        </form>
-        <form th:action="@{/shopMainPage/telefon}" method="post">
-            <input class="windows" type="submit" value="Telefony"/>
-        </form>
-        <form th:action="@{/shopMainPage/adres}" method="post">
-            <input class="windows" type="submit" value="Adresy"/>
         </form>
         <form th:action="@{/shopMainPage/findItems}" method="post">
             <div class="wrap">
@@ -50,10 +46,10 @@
 </div>
 <form th:action="@{/shopMainPage/deleteNumber}" th:each="number:${phones}" method="post">
     <div class="profile-number-container">
-        <div class="number-area"><b th:text="${number.phone}"></b></div>
+        <div class="number-area"><b th:text="${number.getPhone()}"></b></div>
         <div class="button-area">
             <input type="submit" name="submit" value="USUŃ NUMER!"/>
-            <input type="hidden" name="uniqueID" th:value="${number.id}" />
+            <input type="hidden" name="uniqueID" th:value="${number.getId()}" />
         </div>
     </div>
 </form>
@@ -64,6 +60,30 @@
         </div>
         <div class="button-area">
             <input type="submit" value="DODAJ NUMER!"/>
+        </div>
+    </div>
+</form>
+<div class="profile-main-container">
+    <div class="text">
+        Twoje istniejące adresy.
+    </div>
+    <div class="button_new_adrr">
+        <form th:action="@{/shopMainPage/adresAdd}" method="post">
+            <input type="submit" value="DODAJ ADRES!"/>
+        </form>
+    </div>
+</div>
+<form th:action="@{/shopMainPage/adresDelete}" th:each="adr:${adresses}" method="post">
+    <div class="profile-adress-container">
+        <div class="adress">
+            <p th:text="'Email: '+${adr.getEmail()}"></p>
+            <p th:text="'Zamieszkany/a: '+${adr.getCity()}+' '+${adr.getZipCode()}"></p>
+            <p th:if="!${adr.getApartmentNumber()}" th:text="'Adres: '+${adr.getStreet()}+' '+${adr.getStreetNumber()}"></p>
+            <p th:if="${adr.getApartmentNumber()}" th:text="'Adres: '+${adr.getStreet()}+' '+${adr.getStreetNumber()}+'m.'+${adr.getApartmentNumber()}"></p>
+        </div>
+        <div class="button-area-adress">
+            <input type="submit" value="USUŃ ADRES!"/>
+            <input type="hidden" name="uniqueID" th:value="${adr.getId()}" />
         </div>
     </div>
 </form>

@@ -39,29 +39,38 @@
                 </div>
             </div>
         </form>
-
     </ul>
 </div>
+<div class="profile-main-container">
+    Tworzenie nowego adresu.
+</div>
+<div class="email-area">
+    <form th:action="@{/shopMainpage/addingAddress}" method="post">
+        <div class="email">
+            Podaj adres email:
+            <input type="text" name="email">
+        </div>
+        <div class="city">
+            Podaj nazwę miasta, kod pocztowy:
+            <input type="text" name="miasto" >
+            <input type="text" name="kod1" >
+            -
+            <input type="text" name="kod2" >
+        </div>
+        <div class="addr">
+            Podaj nazwę ulicy, jej numer i numer lokalu (opcjonalnie):
+            <input type="text" name="ulica">
+            <input type="text" name="nrulicy">
+            m.
+            <input type="text" name="lokal">
+        </div>
 
-<form th:action="@{/shopMainPage/addToBasket}" th:each="item : ${items}" method="post">
-   <div class="container">
-        <div class="containerForImage">
-            <img th:src="'../images/'+${item.imageName}" class="image">
+
+        <div class="buttons">
+            <input type="submit" value="Dodaj podane dane!" />
         </div>
-        <div class="containerForText">
-            <p><u th:text="${item.itemName}"></u></p>
-            <div class="price" th:text="'Cena za sztukę: '+${item.price}+'zł'"></div>
-            <div class="description" th:text="${item.description}"></div>
-            <div class="purchase">
-                <input type="number" min="0" step="1" value="0" name="ilosc" id="ilosc" placeholder="0">
-            </div>
-            <div class="okbutton">
-                <input type="submit" value="DODAJ DO KOSZYKA!"/>
-                <input type="hidden" name="id_produktu" th:value="${item.id}"/>
-            </div>
-        </div>
-   </div>
-</form>
+    </form>
+</div>
 <br>
 <br>
 <br>

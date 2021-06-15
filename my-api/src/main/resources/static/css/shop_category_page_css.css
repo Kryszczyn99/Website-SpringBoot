@@ -331,7 +331,7 @@ h1
     text-align: right;
     float: right;
 }
-
+/*////////////////////////////////////////////////////////////////////////*/
 .button-area input[type="submit"]
 {
     margin-top: 11px;
@@ -384,6 +384,198 @@ h1
     font-size: 40px;
 }
 .container-for-orders input[type="submit"]:hover
+{
+    curson: pointer;
+    background: #ffc107;
+    color: #000;
+}
+/*////////////////////////////////////////////////////////////////////////*/
+.adress
+{
+    margin-top: 25px;
+    float: left;
+    font-size: 18px;
+    margin-left: 15px;
+}
+.profile-adress-container{
+    width: 600px;
+    height: 125px;
+    background-image: linear-gradient(to right,#deeaee,#FFFECF,#C3EBF9,#C2F5CF,#FFFECF);
+    border: 5px solid green;
+    margin: 0 auto;
+    margin-top: 25px;
+    font-size: 25px;
+    text-align: center;
+}
+.button-area-adress{
+    text-align: right;
+    float: right;
+}
+
+.button-area-adress input[type="submit"]
+{
+    margin-top: 33px;
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 150px;
+    margin-right: 75px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 20px;
+}
+.button-area-adress input[type="submit"]:hover
+{
+    curson: pointer;
+    background: #ffc107;
+    color: #000;
+}
+.button_new_adrr
+{
+    float: right;
+}
+.button_new_adrr input[type="submit"]
+{
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 150px;
+    margin-right: 75px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 20px;
+}
+.button_new_adrr input[type="submit"]:hover
+{
+    curson: pointer;
+    background: #ffc107;
+    color: #000;
+}
+.text
+{
+    float: left;
+    margin-left: 10px;
+}
+
+.email-area
+{
+    width: 800px;
+    height: 300px;
+    background-image: linear-gradient(to right,#deeaee,#FFFECF,#C3EBF9,#C2F5CF,#FFFECF);
+    border: 5px solid green;
+    margin: 0 auto;
+    margin-top: 50px;
+    font-size: 20px;
+    text-align: center;
+}
+.buttons input[type="submit"]
+{
+    margin-top: 30px;
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 150px;
+    margin-right: 75px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 20px;
+}
+.buttons input[type="submit"]:hover
+{
+    curson: pointer;
+    background: #ffc107;
+    color: #000;
+}
+.email
+{
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 15px;
+    font-size: 15px;
+}
+.email input[type="text"]
+{
+    height: 40px;
+    width: 300px;
+    margin-left: 20px;
+    text-align: center;
+}
+.city
+{
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 15px;
+    font-size: 15px;
+}
+.city input[type="text"]
+{
+    height: 40px;
+    width: 200px;
+    margin-left: 20px;
+    text-align: center;
+
+}
+.city input[name="kod1"]
+{
+    height: 40px;
+    width: 40px;
+    margin-left: 20px;
+    text-align: center;
+}
+.city input[name="kod2"]
+{
+    height: 40px;
+    width: 75px;
+    text-align: center;
+    margin-left: 2px;
+}
+.addr
+{
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 15px;
+    font-size: 14px;
+
+}
+.addr input[name="ulica"]
+{
+    height: 40px;
+    width: 200px;
+    margin-left: 20px;
+    text-align: center;
+}
+.addr input[name="nrulicy"]
+{
+    height: 40px;
+    width: 50px;
+    margin-left: 5px;
+    text-align: center;
+}
+.addr input[name="lokal"]
+{
+    height: 40px;
+    width: 50px;
+    margin-left: 5px;
+    text-align: center;
+}
+.buttons button
+{
+    margin-top: 30px;
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 150px;
+    margin-right: 75px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 20px;
+}
+.buttons button:hover
 {
     curson: pointer;
     background: #ffc107;

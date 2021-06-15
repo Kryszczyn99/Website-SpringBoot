@@ -11,7 +11,9 @@
 <div class="menu-bar">
     <ul>
 
-        <input class="window_name" type="submit" th:value="'Witaj w naszym sklepie: '+ ${firstName}"/>
+        <form th:action="@{/shopMainPage/profile}" method="post">
+            <input class="window_name" type="submit" th:value="'Witaj w naszym sklepie: '+ ${firstName}"/>
+        </form>
         <form th:action="@{/logout}" method="post">
             <input class="logout_button" type="submit" value="Wyloguj się!"/>
         </form>
@@ -26,12 +28,6 @@
         </form>
         <form th:action="@{/shopMainPage/koszyk}" method="post">
             <input class="windows" type="submit" value="Koszyk"/>
-        </form>
-        <form th:action="@{/shopMainPage/telefon}" method="post">
-            <input class="windows" type="submit" value="Telefony"/>
-        </form>
-        <form th:action="@{/shopMainPage/adres}" method="post">
-            <input class="windows" type="submit" value="Adresy"/>
         </form>
         <form th:action="@{/shopMainPage/findItems}" method="post">
             <div class="wrap">
