@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8" />
+    <title>Sklep internetowy</title>
+    <link rel="stylesheet" th:href="@{/css/shop_basket_page_css.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+<div class="menu-bar">
+    <ul>
+
+        <form th:action="@{/shopMainPage/profile}" method="post">
+            <input class="window_name" type="submit" th:value="'Witaj w naszym sklepie: '+ ${firstName}"/>
+        </form>
+        <form th:action="@{/logout}" method="post">
+            <input class="logout_button" type="submit" value="Wyloguj się!"/>
+        </form>
+        <form th:action="@{/shopMainPage/ogrod}" method="post">
+            <input class="windows" type="submit" value="Ogród"/>
+        </form>
+        <form th:action="@{/shopMainPage/gaming}" method="post">
+            <input class="windows" type="submit" value="Gaming"/>
+        </form>
+        <form th:action="@{/shopMainPage/krzesla}" method="post">
+            <input class="windows" type="submit" value="Krzesła"/>
+        </form>
+        <form th:action="@{/shopMainPage/koszyk}" method="post">
+            <input class="windows" type="submit" value="Koszyk"/>
+        </form>
+        <form th:action="@{/shopMainPage/findItems}" method="post">
+            <div class="wrap">
+                <div class="search">
+                    <input type="text" class="searchTerm" name="search"  placeholder="What are you looking for?">
+                    <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </ul>
+</div>
+<div class="profile-main-container">
+    Wybierz adres dostawy.
+</div>
+<div class="adrs">
+    <form th:action="@{/shopMainPage/acceptOrder}" th:each="adr : ${addresses}" method="post">
+        <input th:if="!${adr.getApartmentNumber()}" type="submit" th:value="${adr.getCity()}+' '+${adr.getZipCode()}+' '+${adr.getStreet()}+' '+${adr.getStreetNumber()}" />
+        <input th:if="${adr.getApartmentNumber()}" type="submit" th:value="${adr.getCity()}+' '+${adr.getZipCode()}+' '+${adr.getStreet()}+' '+${adr.getStreetNumber()}+'m.'+${adr.getApartmentNumber()}"/>
+        <input type="hidden" name="uniqueID" th:value="${adr.getId()}" />
+    </form>
+</div>
+<div class="new_adrs">
+    <form th:action="@{/shopMainPage/adresAdd}" method="post">
+        <input type="submit" value="DODAJ NOWY ADRES!" />
+    </form>
+</div>
+<br>
+<br>
+<br>
+</body>
+</html>

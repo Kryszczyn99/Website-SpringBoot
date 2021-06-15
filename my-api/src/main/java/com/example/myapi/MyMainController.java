@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -30,6 +32,12 @@ class MyMainController {
 
     @Autowired
     private AddressesRepository repoAdresses;
+
+    @Autowired
+    private OrderItemsRepository repoItemsOrder;
+
+    @Autowired
+    private OrdersRepository repoOrders;
 
     @GetMapping("")
     public String loginHomePage() {
@@ -210,7 +218,61 @@ class MyMainController {
     @PostMapping("/shopMainPage/acceptBasket")
     public String acceptBasket(Model model)
     {
-        return "shop_basket_page_layout";
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        Long idClient = ((CustomUserDetails)user).getId();
+        List<Addresses> list = repoAdresses.findAddressesByClientId(idClient);
+        model.addAttribute("firstName",firstName);
+        model.addAttribute("addresses",list);
+        return "shop_basket_accept_layout";
+    }
+
+    @PostMapping("/shopMainPage/acceptOrder")
+    public String acceptOrder(Model model,@RequestParam(name="uniqueID") Long idAddress) throws ParseException {
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String firstName = ((CustomUserDetails)user).getFirstName();
+        Long idClient = ((CustomUserDetails)user).getId();
+        System.out.println(idAddress);
+
+        Orders newOrder = new Orders();
+
+        newOrder.setIdStatus(1L);/////////
+        newOrder.setIdClient(idClient);///////
+        newOrder.setIdAddress(idAddress);////////
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date currentDate = formatter.parse(formatter.format(new Date()));
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDate);
+        c.add(Calendar.MONTH, 1);
+        Date currentDatePlusOneMonth = c.getTime();
+
+        newOrder.setExpectedDeliveryDate(currentDatePlusOneMonth);//////////////
+
+        List<Basket> listBasket = repoBasket.findItemsByClientId(idClient);
+        double totalCost=0.0;
+        for(Basket b:listBasket)
+        {
+            Item item = repoItems.findItemById(b.getIdItem());
+            totalCost+=item.getPrice()*b.getItemCountered();
+        }
+        double roundedTotalCost = Math.round(totalCost*100.0)/100.0;
+        newOrder.setPrice(roundedTotalCost);//////////////////////////
+        repoOrders.save(newOrder);
+
+        System.out.println(newOrder.getId());
+
+        for(Basket b:listBasket)
+        {
+            OrderItems item = new OrderItems();
+            item.setIdItem(b.getIdItem());
+            item.setIdOrder(newOrder.getId());
+            item.setItemCountered(b.getItemCountered());
+            repoItemsOrder.save(item);
+        }
+        repoBasket.deleteEverythingFromUserBasket(idClient);
+        model.addAttribute("firstName",firstName);
+        return "shop_main_page_layout";
     }
 
     @PostMapping("/shopMainPage/oneItemAction")
@@ -328,7 +390,7 @@ class MyMainController {
         return "shop_profile";
     }
     @PostMapping("/shopMainPage/adresAdd")
-    public String addressAdding(Model model)
+    public String addressAdding(Model model,@RequestParam(name="uniqueID") Long id)
     {
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String firstName = ((CustomUserDetails)user).getFirstName();

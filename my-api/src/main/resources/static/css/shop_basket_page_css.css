@@ -353,3 +353,65 @@ body
     background: #ffc107;
     color: #000;
 }
+
+.profile-main-container{
+    width: 800px;
+    height: 75px;
+    background-image: linear-gradient(to right,#deeaee,#FFFECF,#C3EBF9,#C2F5CF,#FFFECF);
+    border: 5px solid green;
+    margin: 0 auto;
+    margin-top: 50px;
+    font-size: 50px;
+    text-align: center;
+}
+.adrs
+{
+    margin-top: 10px;
+    text-align: center;
+}
+
+.adrs input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 75px;
+    width: 500px;
+    margin-top: 15px;
+    background-image: linear-gradient(to right,#deeaee,#FFFECF,#C3EBF9,#C2F5CF,#FFFECF);
+    border: 5px solid green;
+    color: black;
+    font-size: 16px;
+    border-radius: 50px;
+}
+.adrs input[type="submit"]:hover
+{
+    curson: pointer;
+    background: #ffc107;
+    color: #000;
+}
+.new_adrs
+{
+    margin-top: 40px;
+    text-align: center;
+}
+.new_adrs input[value="DODAJ NOWY ADRES!"]
+{
+    border: none;
+    outline: none;
+    height: 75px;
+    width: 500px;
+    margin-top: 15px;
+    background-image: linear-gradient(to right,#deeaee,#FFFECF,#C3EBF9,#C2F5CF,#FFFECF);
+    border: 5px solid green;
+    color: black;
+    font-size: 25px;
+    font-style: italic;
+    font-weight: bold;
+    border-radius: 50px;
+}
+.new_adrs input[value="DODAJ NOWY ADRES!"]:hover
+{
+    curson: pointer;
+    background: #ffc107;
+    color: #000;
+}
