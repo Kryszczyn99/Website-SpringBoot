@@ -257,3 +257,35 @@ body
     padding-top: 30px;
     padding-left: 30px;
 }
+.last-container
+{
+    width: 800px;
+    height: 95px;
+    background-image: linear-gradient(to right,#deeaee,#FFFECF,#C3EBF9,#C2F5CF,#FFFECF);
+    border-left: 5px solid green;
+    border-bottom: 5px solid green;
+    border-right: 5px solid green;
+    margin: 0 auto;
+    margin-top: 0px;
+    font-size: 50px;
+    text-align: left;
+}
+.last-container input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 300px;
+    margin-right: 75px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 15px;
+    margin-left: 250px;
+    border-radius: 30px;
+}
+.last-container input[type="submit"]:hover
+{
+    curson: pointer;
+    background: #ffc107;
+    color: #000;
+}

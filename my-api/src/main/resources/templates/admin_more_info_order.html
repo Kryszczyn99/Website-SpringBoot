@@ -46,6 +46,32 @@
         </p>
     </form>
 </div>
+<!--<div class="modify-container">-->
+<!--    <form action="zmien_status.php" method="post">-->
+<!--        <p>Modyfikuj status:-->
+<!--            <select name="statusy" th:each="option:${status}">-->
+<!--                <option value="'.$row["ID_Status"].'"selected>'.$row["Nazwa_Statusu"].'</option>-->
+<!--            </select>-->
+<!--            <input type="submit" value="Zaakceptuj zmianę!">-->
+<!--        </p>-->
+<!--    </form>-->
+<!--</div>-->
+<div class="phones">
+    <div class="text_phones">
+        Telefony klienta:
+    </div>
+    <div class="list_of_phones">
+         <div th:each="phone:${phones}">
+             <p th:text="${phone.getPhone()}"></p>
+         </div>
+    </div>
+</div>
+<div class="last-container">
+    <form th:action="@{/shopMainPage/deleteFromDatabase}" method="post">
+        <input type="submit" value="Usuń zamówienie z bazy danych!">
+        <input type="hidden" name="unique_ID" th:value="${id}">
+    </form>
+</div>
 <br>
 <br>
 <br>

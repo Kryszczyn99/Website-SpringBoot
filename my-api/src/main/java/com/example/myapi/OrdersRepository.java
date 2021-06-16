@@ -18,4 +18,9 @@ public interface OrdersRepository extends JpaRepository<Orders,Long> {
     @Modifying()
     @Query("UPDATE Orders i SET i.expectedDeliveryDate=?2 WHERE i.id=?1")
     void updateOrdersByIDForNewDate(Long id, Date date);
+
+    @Transactional
+    @Modifying()
+    @Query("DELETE Orders i WHERE i.id=?1")
+    void DeleteOrderByID(Long id);
 }

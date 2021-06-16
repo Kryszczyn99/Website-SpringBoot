@@ -231,6 +231,8 @@ class MyMainController {
             items.add(repoItems.findItemById(newIO.getIdItem()));
         }
         Date date = repoOrders.getOrderByID(id).getExpectedDeliveryDate();
+        List<PhoneNumber> phones = repoPhone.findPhoneNumbersByClientId(repoOrders.getOrderByID(id).getIdClient());
+        model.addAttribute("phones",phones);
         model.addAttribute("counts",counts);
         model.addAttribute("items",items);
         model.addAttribute("date",date);
@@ -251,11 +253,36 @@ class MyMainController {
             items.add(repoItems.findItemById(newIO.getIdItem()));
         }
         Date date = repoOrders.getOrderByID(id).getExpectedDeliveryDate();
+
+        List<PhoneNumber> phones = repoPhone.findPhoneNumbersByClientId(repoOrders.getOrderByID(id).getIdClient());
+        model.addAttribute("phones",phones);
         model.addAttribute("counts",counts);
         model.addAttribute("items",items);
         model.addAttribute("date",date);
         model.addAttribute("id",id);
         return "admin_more_info_order";
+    }
+
+
+    @PostMapping("/shopMainPage/deleteFromDatabase")
+    public String deleteFromDB(Model model,@RequestParam("unique_ID") Long id)
+    {
+        repoOrders.DeleteOrderByID(id);
+        List<Orders> orders = repoOrders.getOrders();
+        List<Addresses> addresses = new ArrayList<>();
+        for(Orders order:orders)
+        {
+            addresses.add(repoAdresses.findAddressesById(order.getIdAddress()));
+        }
+        List<User> user = new ArrayList<>();
+        for(Orders order:orders)
+        {
+            user.add(repo.findUserById(order.getIdClient()));
+        }
+        model.addAttribute("users",user);
+        model.addAttribute("orders",orders);
+        model.addAttribute("addresses",addresses);
+        return "admin_order_page_layout";
     }
     @PostMapping("/shopMainPage/addToBasket")
     public String addItemToUserBasket(@RequestParam(name ="ilosc") int count, @RequestParam(name ="id_produktu") Long idItem, Basket basket, Model model)
