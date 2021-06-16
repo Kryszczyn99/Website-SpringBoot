@@ -22,11 +22,8 @@
         </form>
     </ul>
 </div>
-<form action="informacje_o_zamowieniu.php" th:each="order,iterator:${orders}"method="post">
+<form th:action="@{/shopMainPage/moreInfo}" th:each="order,iterator:${orders}"method="post">
     <div class="container-for-goods" style="height:200px">
-        <div class="list">
-            <p></p>$row2["Sztuki"]."x ".$row_name["Nazwa"]."<br>
-        </div>
         <div class="date">
             <p th:text="'Numer kontrolny zamówienia: '+${order.getId()}"></p>
             <p th:if="!${addresses[iterator.index].getApartmentNumber()}" th:text="'Dostawa na adres: '+${addresses[iterator.index].getCity()}+' '+${addresses[iterator.index].getZipCode()}+' '+${addresses[iterator.index].getStreet()}+${addresses[iterator.index].getStreetNumber()}" ></p>

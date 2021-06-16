@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -191,10 +193,69 @@ class MyMainController {
         {
             user.add(repo.findUserById(order.getIdClient()));
         }
+//        List<ItemAdminDisplay> items = new ArrayList<>();
+//        for(Orders order:orders)
+//        {
+//            List<OrderItems> temp = repoItemsOrder.findOrderItemsByID(order.getId());
+//            ItemAdminDisplay iad = new ItemAdminDisplay();
+//            for(OrderItems oi:temp)
+//            {
+//                System.out.println(oi.getId());
+//                iad.addCount(oi.getItemCountered());
+//                iad.addItemName(repoItems.findItemById(oi.getIdItem()).getItemName());
+//            }
+//            System.out.println("dodanie");
+//            items.add(iad);
+//        }
+//        for(ItemAdminDisplay ia:items)
+//        {
+//            System.out.println(ia.itemName);
+//        }
+//        System.out.println(items);
+//        model.addAttribute("items",items);
         model.addAttribute("users",user);
         model.addAttribute("orders",orders);
         model.addAttribute("addresses",addresses);
         return "admin_order_page_layout";
+    }
+
+    @PostMapping("/shopMainPage/moreInfo")
+    public String ordersAdminInfo(Model model,@RequestParam("ID_zam") Long id)
+    {
+        List<OrderItems> io = repoItemsOrder.findOrderItemsByID(id);
+        List <Item> items = new ArrayList<>();
+        List<Integer> counts = new ArrayList<>();
+        for(OrderItems newIO:io)
+        {
+            counts.add(newIO.getItemCountered());
+            items.add(repoItems.findItemById(newIO.getIdItem()));
+        }
+        Date date = repoOrders.getOrderByID(id).getExpectedDeliveryDate();
+        model.addAttribute("counts",counts);
+        model.addAttribute("items",items);
+        model.addAttribute("date",date);
+        model.addAttribute("id",id);
+        return "admin_more_info_order";
+    }
+    @PostMapping("/shopMainPage/changeDate")
+    public String changingDate(Model model,@RequestParam("unique_ID") Long id,@RequestParam("new_date") String new_date) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date ld = formatter.parse(new_date);
+        repoOrders.updateOrdersByIDForNewDate(id,ld);
+        List<OrderItems> io = repoItemsOrder.findOrderItemsByID(id);
+        List <Item> items = new ArrayList<>();
+        List<Integer> counts = new ArrayList<>();
+        for(OrderItems newIO:io)
+        {
+            counts.add(newIO.getItemCountered());
+            items.add(repoItems.findItemById(newIO.getIdItem()));
+        }
+        Date date = repoOrders.getOrderByID(id).getExpectedDeliveryDate();
+        model.addAttribute("counts",counts);
+        model.addAttribute("items",items);
+        model.addAttribute("date",date);
+        model.addAttribute("id",id);
+        return "admin_more_info_order";
     }
     @PostMapping("/shopMainPage/addToBasket")
     public String addItemToUserBasket(@RequestParam(name ="ilosc") int count, @RequestParam(name ="id_produktu") Long idItem, Basket basket, Model model)

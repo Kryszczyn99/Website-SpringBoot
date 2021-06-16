@@ -151,3 +151,109 @@ body
     background: #ffc107;
     color: #000;
 }
+.container {
+    width: 800px;
+    height: 200px;
+    background-image: linear-gradient(to right,#deeaee,#FFFECF,#C3EBF9,#C2F5CF,#FFFECF);
+    border: 5px solid green;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+.image {
+    height: 190px;
+    width: 250px;
+    border-right: 5px solid green;
+    float:left;
+}
+
+.containerForText {
+    float:center;
+    text-align: center;
+    margin: 15px;
+}
+.containerForPrice {
+    background-color: yellow;
+    float: center;
+}
+.price {
+    float: right;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.description {
+    margin-top: 50px;
+    font-size: 12px;
+}
+.purchase {
+    margin-top: 10px;
+}
+.purchase input {
+    width: 110px;
+    border: solid 2px green;
+}
+
+.modify-container input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 240px;
+    margin-right: 75px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 20px;
+    float: right;
+}
+.modify-container input[type="submit"]:hover
+{
+    curson: pointer;
+    background: #ffc107;
+    color: #000;
+}
+.phones
+{
+    width: 800px;
+    height: 95px;
+    background-image: linear-gradient(to right,#deeaee,#FFFECF,#C3EBF9,#C2F5CF,#FFFECF);
+    border-left: 5px solid green;
+    border-bottom: 5px solid green;
+    border-right: 5px solid green;
+    margin: 0 auto;
+    margin-top: 0px;
+    font-size: 50px;
+    text-align: left;
+}
+.text_phones
+{
+    margin-left: 25px;
+    font-size: 40px;
+    padding-top: 20px;
+    float: left;
+}
+.list_of_phones
+{
+    float: right;
+    font-size: 20px;
+    padding-right: 100px;
+    padding-top: 15px;
+}
+.modify-container
+{
+    width: 800px;
+    height: 95px;
+    background-image: linear-gradient(to right,#deeaee,#FFFECF,#C3EBF9,#C2F5CF,#FFFECF);
+    border-left: 5px solid green;
+    border-bottom: 5px solid green;
+    border-right: 5px solid green;
+    margin: 0 auto;
+    margin-top: 0px;
+    font-size: 50px;
+    text-align: left;
+}
+.modify-container p
+{
+    font-size: 20px;
+    padding-top: 30px;
+    padding-left: 30px;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8" />
+    <title>Sklep internetowy</title>
+    <link rel="stylesheet" th:href="@{/css/admin_main_page_css.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+<div class="menu-bar">
+    <ul>
+        <input class="window_name" type="submit" th:value="'Admin panel'"/>
+        <form th:action="@{/logout}" method="post">
+            <input class="logout_button" type="submit" value="Wyloguj się!"/>
+        </form>
+        <form th:action="@{/shopMainPage/new_admin}" method="post">
+            <input class="windows" type="submit" value="Dodaj admina"/>
+        </form>
+        <form th:action="@{/shopMainPage/adminOrders}" method="post">
+            <input class="windows" type="submit" value="Zamówienia"/>
+        </form>
+    </ul>
+</div>
+<div class="profile-main-container">
+    <p>Zamówienie klienta!</p>
+</div>
+<form th:each="item,iterator : ${items}" method="post">
+    <div class="container" >
+        <div class="containerForImage">
+            <img th:src="'../images/'+${item.imageName}" class="image">
+        </div>
+        <div class="containerForText">
+            <p><u th:text="${item.itemName}"></u></p>
+            <div class="description" th:text="${item.description}"></div>
+            <b><div class="description" th:text="'Sztuk zamówionych: '+${counts[iterator.index]}"></div></b>
+        </div>
+    </div>
+</form>
+<div class="modify-container">
+    <form th:action="@{/shopMainPage/changeDate}" method="post">
+        <p>Modyfikuj zmień datę:
+            <input type="date" name="new_date" th:value="${date}">
+            <input type="hidden" name="unique_ID" th:value="${id}">
+            <input type="submit" value="Zaakceptuj zmianę!">
+        </p>
+    </form>
+</div>
+<br>
+<br>
+<br>
+</body>
+</html>
