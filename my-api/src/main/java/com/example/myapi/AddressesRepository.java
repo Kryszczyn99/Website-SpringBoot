@@ -11,7 +11,8 @@ public interface AddressesRepository extends JpaRepository<Addresses,Long> {
 
     @Query("SELECT i FROM Addresses i WHERE i.idClient = ?1")
     List<Addresses> findAddressesByClientId(Long client);
-
+    @Query("SELECT i FROM Addresses i WHERE i.id=?1")
+    Addresses findAddressesById(Long id);
     @Transactional
     @Modifying()
     @Query("DELETE FROM Addresses i WHERE i.idClient=?1 AND i.id=?2")

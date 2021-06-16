@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8" />
+    <title>Sklep internetowy</title>
+    <link rel="stylesheet" th:href="@{/css/admin_main_page_css.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+<div class="menu-bar">
+    <ul>
+        <input class="window_name" type="submit" th:value="'Admin panel'"/>
+        <form th:action="@{/logout}" method="post">
+            <input class="logout_button" type="submit" value="Wyloguj się!"/>
+        </form>
+        <form th:action="@{/shopMainPage/new_admin}" method="post">
+            <input class="windows" type="submit" value="Dodaj admina"/>
+        </form>
+        <form th:action="@{/shopMainPage/adminOrders}" method="post">
+            <input class="windows" type="submit" value="Zamówienia"/>
+        </form>
+    </ul>
+</div>
+<form action="informacje_o_zamowieniu.php" th:each="order,iterator:${orders}"method="post">
+    <div class="container-for-goods" style="height:200px">
+        <div class="list">
+            <p></p>$row2["Sztuki"]."x ".$row_name["Nazwa"]."<br>
+        </div>
+        <div class="date">
+            <p th:text="'Numer kontrolny zamówienia: '+${order.getId()}"></p>
+            <p th:if="!${addresses[iterator.index].getApartmentNumber()}" th:text="'Dostawa na adres: '+${addresses[iterator.index].getCity()}+' '+${addresses[iterator.index].getZipCode()}+' '+${addresses[iterator.index].getStreet()}+${addresses[iterator.index].getStreetNumber()}" ></p>
+            <p th:if="${addresses[iterator.index].getApartmentNumber()}" th:text="'Dostawa na adres: '+${addresses[iterator.index].getCity()}+' '+${addresses[iterator.index].getZipCode()}+' '+${addresses[iterator.index].getStreet()}+${addresses[iterator.index].getStreetNumber()}+'m.'+${addresses[iterator.index].getApartmentNumber()}" ></p>
+            <p th:text="${users[iterator.index].getFirstName()}+' '+${users[iterator.index].getLastName()}"></p>
+            <p th:text="'Email kontaktowy: '+${addresses[iterator.index].getEmail()}"></p>
+            <input type="submit" value="Więcej informacji" />
+            <input type="hidden" name="ID_zam" th:value="${order.getId()}" />
+        </div>
+    </div>
+</form>
+</body>
+</html>

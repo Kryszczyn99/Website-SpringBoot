@@ -8,5 +8,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface OrderItemsRepository extends JpaRepository<OrderItems,Long> {
-
+    @Query("SELECT i FROM OrderItems i WHERE i.idOrder=?1")
+    List<OrderItems> findOrderItemsByID(Long id);
 }

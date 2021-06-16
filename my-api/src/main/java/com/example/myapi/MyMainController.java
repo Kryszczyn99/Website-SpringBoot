@@ -177,6 +177,25 @@ class MyMainController {
         return "admin_register_success";
     }
 
+    @PostMapping("/shopMainPage/adminOrders")
+    public String ordersAdmin(Model model)
+    {
+        List<Orders> orders = repoOrders.getOrders();
+        List<Addresses> addresses = new ArrayList<>();
+        for(Orders order:orders)
+        {
+            addresses.add(repoAdresses.findAddressesById(order.getIdAddress()));
+        }
+        List<User> user = new ArrayList<>();
+        for(Orders order:orders)
+        {
+            user.add(repo.findUserById(order.getIdClient()));
+        }
+        model.addAttribute("users",user);
+        model.addAttribute("orders",orders);
+        model.addAttribute("addresses",addresses);
+        return "admin_order_page_layout";
+    }
     @PostMapping("/shopMainPage/addToBasket")
     public String addItemToUserBasket(@RequestParam(name ="ilosc") int count, @RequestParam(name ="id_produktu") Long idItem, Basket basket, Model model)
     {
