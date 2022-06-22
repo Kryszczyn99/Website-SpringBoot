@@ -1,6 +1,6 @@
 # Website-SpringBoot
 
-Simple shopping website created in Spring Boot, Hibernate and PostgreSQL. 
+Simple shopping website created in Spring Boot, Hibernate and PostgreSQL
 
 ## Basic information
 The mail goal of this project was to learn using mentioned above technologies.
